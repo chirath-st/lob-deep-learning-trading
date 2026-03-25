@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Data (raw is large, track with DVC if needed)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Experiments (checkpoints and intermediate data)
+experiments/**/checkpoints/
+experiments/**/*.pt
+experiments/**/*.npy
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# W&B
+wandb/
+
+# Claude Code
+.claude/
+**/CLAUDE.md
+CLAUDE.local.md
+KICKOFF_PROMPT.md
+
+# SLURM
+logs/
+scripts/slurm/
+scripts/slurm_*.sh
+
+# Notebook exports
+notebooks/*.html
+notebooks/*.pdf
+
+# Misc
+texput.log
+docs/session_handoff.md
+docs/amarel_setup.md
+
+# Secrets
+.env

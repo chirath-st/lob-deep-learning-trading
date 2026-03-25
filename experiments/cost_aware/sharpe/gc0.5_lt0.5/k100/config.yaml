@@ -1,0 +1,27 @@
+data:
+  data_dir: data/processed
+  horizon: 100
+logging:
+  save_dir: experiments/cost_aware/sharpe
+loss:
+  cost_multiplier: 0.5
+  gamma_cost: 0.5
+  lambda_turnover: 0.5
+  type: sharpe
+model:
+  conv_filters: 32
+  inception_filters: 64
+  leaky_relu_slope: 0.01
+  lstm_hidden: 64
+  lstm_layers: 1
+  name: deeplob
+  num_classes: 3
+training:
+  adam_epsilon: 1.0e-08
+  batch_size: 256
+  early_stopping_patience: 15
+  learning_rate: 0.0001
+  max_epochs: 100
+  seed: 42
+  warmstart_from: experiments/k10/best_model.pt
+  warmup_epochs: 3

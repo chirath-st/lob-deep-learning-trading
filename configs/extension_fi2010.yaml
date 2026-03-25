@@ -1,0 +1,43 @@
+# DeepLOB-Attention Configuration — FI-2010 Dataset
+# Extension: Transformer encoder replaces LSTM (ADR-003)
+# Reference: Zhang et al. 2019 for base CNN+Inception architecture
+
+model:
+  name: deeplob_attention
+  num_classes: 3
+  # CNN blocks (same as DeepLOB — ADR-005)
+  conv_filters: 32
+  leaky_relu_slope: 0.01
+  # Inception (same as DeepLOB)
+  inception_filters: 64
+  # Transformer encoder (NEW — replaces LSTM)
+  d_model: 192            # matches Inception output (64×3), no projection needed
+  n_heads: 4              # 192/4 = 48 dims per head
+  n_encoder_layers: 2     # 2 layers of self-attention + FFN
+  dim_feedforward: 256    # FFN hidden dimension
+  dropout: 0.1            # attention + FFN dropout
+  pooling: mean           # mean | last | cls
+  max_seq_len: 120        # positional encoding buffer (actual seq = 106)
+
+data:
+  dataset: fi2010
+  normalization: DecPre
+  lookback: 100
+  horizon: 10             # overridden by --horizon CLI arg
+  num_levels: 10
+  setup: 2
+
+training:
+  batch_size: 64
+  learning_rate: 0.001     # lower than DeepLOB's 0.01 — Transformers need smaller LR
+  optimizer: adam
+  adam_epsilon: 1.0e-8     # standard Adam (not paper's unusual 1.0)
+  warmup_epochs: 5         # linear LR warmup for Transformer stability
+  max_epochs: 200
+  early_stopping_patience: 20
+  seed: 42
+
+logging:
+  wandb_project: deeplob-extension
+  save_dir: experiments/extension/
+  log_every_n_steps: 100

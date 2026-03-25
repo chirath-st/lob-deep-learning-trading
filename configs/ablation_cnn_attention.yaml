@@ -1,0 +1,46 @@
+# Ablation: CNN + Attention — No Inception Module
+# Tests whether Transformer attention can replace Inception's multi-scale features.
+# Architecture: CNN Block 1-3 → Positional Encoding → TransformerEncoder(d=32) → Mean Pool → FC
+#
+# 📚 Study: Inception extracts features at 3 different temporal scales (conv 1×1, 3×1, 5×1).
+#    This ablation tests if self-attention can learn those multi-scale patterns directly
+#    from the raw CNN output (d=32), without the explicit multi-scale Inception design.
+#    Note: d_model=32 here (from conv_filters) vs d_model=192 in the full model.
+
+model:
+  name: cnn_attention
+  num_classes: 3
+  # CNN blocks (same as DeepLOB)
+  conv_filters: 32
+  leaky_relu_slope: 0.01
+  # inception_filters included for model factory compatibility (not used in forward pass)
+  inception_filters: 64
+  # Transformer encoder (operates on d=32, smaller than full model's d=192)
+  n_heads: 4              # 32/4 = 8 dims per head
+  n_encoder_layers: 2     # same depth as full attention model
+  dim_feedforward: 128    # smaller FFN (proportional to smaller d_model)
+  dropout: 0.1
+  max_seq_len: 120
+
+data:
+  dataset: fi2010
+  normalization: DecPre
+  lookback: 100
+  horizon: 10             # overridden by --horizon CLI arg
+  num_levels: 10
+  setup: 2
+
+training:
+  batch_size: 64
+  learning_rate: 0.001     # same as extension — has Transformer
+  optimizer: adam
+  adam_epsilon: 1.0e-8
+  warmup_epochs: 5         # Transformer needs warmup for stability
+  max_epochs: 200
+  early_stopping_patience: 20
+  seed: 42
+
+logging:
+  wandb_project: deeplob-extension
+  save_dir: experiments/ablation/cnn_attention/
+  log_every_n_steps: 100

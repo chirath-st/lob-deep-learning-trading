@@ -1,0 +1,33 @@
+data:
+  dataset: fi2010
+  horizon: 100
+  lookback: 100
+  normalization: DecPre
+  num_levels: 10
+  setup: 2
+logging:
+  log_every_n_steps: 100
+  save_dir: experiments/extension/
+  wandb_project: deeplob-extension
+model:
+  conv_filters: 32
+  d_model: 192
+  dim_feedforward: 256
+  dropout: 0.1
+  inception_filters: 64
+  leaky_relu_slope: 0.01
+  max_seq_len: 120
+  n_encoder_layers: 2
+  n_heads: 4
+  name: deeplob_attention
+  num_classes: 3
+  pooling: mean
+training:
+  adam_epsilon: 1.0e-08
+  batch_size: 64
+  early_stopping_patience: 20
+  learning_rate: 0.001
+  max_epochs: 200
+  optimizer: adam
+  seed: 42
+  warmup_epochs: 5

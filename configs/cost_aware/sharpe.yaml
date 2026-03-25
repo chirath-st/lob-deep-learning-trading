@@ -1,0 +1,42 @@
+# Cost-Aware Training: Differentiable Sharpe Ratio Loss
+# Bypasses classification entirely. Optimizes risk-adjusted net-of-cost returns.
+# Override lambda_turnover via --loss-param CLI arg.
+#
+# KEY DIFFERENCES from other configs:
+# - Lower LR (0.0001): prevents destroying pre-trained features
+# - Warm-start from pre-trained DeepLOB checkpoint
+# - Sequential loading (shuffle=False): needs consecutive prices
+# - Larger batch (256): more returns per batch = better Sharpe estimate
+# - Uses half-cost trick (gamma_cost=0.5): avoids inertia trap
+
+model:
+  name: deeplob
+  num_classes: 3
+  conv_filters: 32
+  inception_filters: 64
+  lstm_hidden: 64
+  lstm_layers: 1
+  leaky_relu_slope: 0.01
+
+loss:
+  type: sharpe
+  cost_multiplier: 0.5      # half-spread per position change
+  gamma_cost: 0.5           # half-cost trick (Wood et al. 2025)
+  lambda_turnover: 0.01     # overridden by --loss-param; sweep: 0.01, 0.1
+
+data:
+  data_dir: data/processed
+  horizon: 10
+
+training:
+  batch_size: 256            # larger batch = better Sharpe estimate
+  learning_rate: 0.0001      # much lower than CE training — fine-tuning
+  adam_epsilon: 1.0e-8       # standard Adam (not paper's unusual 1.0)
+  warmup_epochs: 3           # gentle warmup for fine-tuning
+  warmstart_from: experiments/k10/best_model.pt   # pre-trained DeepLOB
+  max_epochs: 100            # fewer epochs — fine-tuning converges faster
+  early_stopping_patience: 15
+  seed: 42
+
+logging:
+  save_dir: experiments/cost_aware/sharpe

@@ -1,0 +1,26 @@
+data:
+  dataset: fi2010
+  horizon: 10
+  lookback: 100
+  normalization: DecPre
+  num_levels: 10
+  setup: 2
+logging:
+  log_every_n_steps: 100
+  save_dir: experiments/ablation/cnn_only/
+  wandb_project: deeplob-extension
+model:
+  conv_filters: 32
+  inception_filters: 64
+  leaky_relu_slope: 0.01
+  name: cnn_only
+  num_classes: 3
+training:
+  adam_epsilon: 1.0e-08
+  batch_size: 64
+  early_stopping_patience: 20
+  learning_rate: 0.001
+  max_epochs: 200
+  optimizer: adam
+  seed: 42
+  warmup_epochs: 0

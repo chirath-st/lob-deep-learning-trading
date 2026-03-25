@@ -1,0 +1,36 @@
+# DeepLOB Training Configuration — FI-2010 Dataset
+# Reference: Zhang et al. 2019, Table II (Setup 2)
+
+model:
+  name: deeplob
+  num_classes: 3
+  # CNN block (official code spec — ADR-005)
+  conv_filters: 32        # Official code uses 32 (paper says 16)
+  leaky_relu_slope: 0.01
+  # Inception block
+  inception_filters: 64   # Official code uses 64 (paper says 32)
+  # LSTM block
+  lstm_hidden: 64
+  lstm_layers: 1
+
+data:
+  dataset: fi2010
+  normalization: DecPre  # Official code uses DecPre (decimal precision). Options: ZScore, MinMax, DecPre
+  lookback: 100          # T=100 most recent LOB states
+  horizon: 10            # Prediction horizon k (10, 20, 30, 50, 100)
+  num_levels: 10         # LOB depth
+  setup: 2               # Setup 2: days 1-7 train, 8-10 test
+
+training:
+  batch_size: 64         # Official code uses 64 (paper says 32)
+  learning_rate: 0.01
+  optimizer: adam
+  adam_epsilon: 1.0      # Paper specifies epsilon=1
+  max_epochs: 200
+  early_stopping_patience: 20
+  seed: 42
+
+logging:
+  wandb_project: deeplob-replication
+  save_dir: experiments/
+  log_every_n_steps: 100

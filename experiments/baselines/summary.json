@@ -1,0 +1,47 @@
+{
+  "k10": {
+    "deeplob_acc": 81.88,
+    "logistic_regression_acc": 72.2,
+    "logistic_regression_f1": 62.79,
+    "mlp_acc": 70.69,
+    "mlp_f1": 58.55,
+    "xgboost_acc": 80.16,
+    "xgboost_f1": 77.45
+  },
+  "k20": {
+    "deeplob_acc": 73.77,
+    "logistic_regression_acc": 63.67,
+    "logistic_regression_f1": 54.56,
+    "mlp_acc": 62.08,
+    "mlp_f1": 47.55,
+    "xgboost_acc": 71.99,
+    "xgboost_f1": 68.2
+  },
+  "k30": {
+    "deeplob_acc": 76.14,
+    "logistic_regression_acc": 57.9,
+    "logistic_regression_f1": 53.63,
+    "mlp_acc": 56.13,
+    "mlp_f1": 40.36,
+    "xgboost_acc": 72.89,
+    "xgboost_f1": 71.12
+  },
+  "k50": {
+    "deeplob_acc": 77.34,
+    "logistic_regression_acc": 50.23,
+    "logistic_regression_f1": 50.4,
+    "mlp_acc": 39.32,
+    "mlp_f1": 39.46,
+    "xgboost_acc": 71.82,
+    "xgboost_f1": 71.38
+  },
+  "k100": {
+    "deeplob_acc": 78.19,
+    "logistic_regression_acc": 47.62,
+    "logistic_regression_f1": 40.58,
+    "mlp_acc": 42.06,
+    "mlp_f1": 35.28,
+    "xgboost_acc": 66.53,
+    "xgboost_f1": 66.54
+  }
+}

@@ -1,0 +1,180 @@
+/* Clean, readable PDF styling */
+@page {
+    size: A4;
+    margin: 2.5cm 2.5cm 2.5cm 2.5cm;
+
+    @bottom-center {
+        content: counter(page);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 9pt;
+        color: #888;
+    }
+}
+
+body {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 11.5pt;
+    line-height: 1.65;
+    color: #1a1a1a;
+    max-width: 100%;
+}
+
+/* Headings */
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #111;
+    margin-top: 0.5cm;
+    margin-bottom: 0.3cm;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.2cm;
+}
+
+h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15pt;
+    font-weight: 600;
+    color: #222;
+    margin-top: 1cm;
+    margin-bottom: 0.3cm;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.15cm;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12.5pt;
+    font-weight: 600;
+    color: #333;
+    margin-top: 0.7cm;
+    margin-bottom: 0.2cm;
+}
+
+h4 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: #444;
+    margin-top: 0.5cm;
+    margin-bottom: 0.15cm;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 0.4cm;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5cm 0;
+    font-size: 10pt;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+thead {
+    background-color: #f0f0f0;
+}
+
+th {
+    font-weight: 600;
+    text-align: left;
+    padding: 6pt 8pt;
+    border-bottom: 2px solid #666;
+    color: #222;
+}
+
+td {
+    padding: 5pt 8pt;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Bold in tables for emphasis */
+td strong, th strong {
+    color: #111;
+}
+
+/* Lists */
+ul, ol {
+    margin-bottom: 0.4cm;
+    padding-left: 1.2cm;
+}
+
+li {
+    margin-bottom: 0.15cm;
+}
+
+/* Block quotes */
+blockquote {
+    border-left: 3px solid #ccc;
+    margin: 0.5cm 0;
+    padding: 0.2cm 0.5cm;
+    color: #555;
+    font-style: italic;
+    background-color: #f9f9f9;
+}
+
+/* Code */
+code {
+    font-family: "Menlo", "Consolas", monospace;
+    font-size: 9.5pt;
+    background-color: #f4f4f4;
+    padding: 1pt 3pt;
+    border-radius: 2pt;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 0.3cm;
+    border-radius: 3pt;
+    font-size: 9pt;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    border: 1px solid #e0e0e0;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* Horizontal rules */
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 0.8cm 0;
+}
+
+/* Links (show as dark text in print) */
+a {
+    color: #2a5db0;
+    text-decoration: none;
+}
+
+/* Emphasis */
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: 700;
+}
+
+/* Subtitle / italic intro */
+h1 + p > em:first-child {
+    display: block;
+    font-size: 11pt;
+    color: #555;
+    margin-bottom: 0.5cm;
+}
